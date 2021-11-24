@@ -8,11 +8,11 @@
 package trabainHmmmm;
 
 public class Funcionario extends Pessoa {
+
+	private double salario;
+	private String funcao;
 	
-	int salario;
-	String funcao;
-	
-	public Funcionario(String nome, String cpf,Endereco endereco, String celular, int salario, String funcao) {
+	public Funcionario(String nome, String cpf,Endereco endereco, String celular, double salario, String funcao) {
 		super(nome, cpf, endereco, celular);
 		this.salario = salario;
 		this.funcao = funcao;
@@ -24,11 +24,11 @@ public class Funcionario extends Pessoa {
 		return getNome()+""+getCpf()+""+getCelular()+""+funcao+""+salario;
 	}
 
-	public int getSalario() {
+	public double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(int salario) {
+	public void setSalario(double salario) {
 		this.salario = salario;
 	}
 

@@ -34,11 +34,13 @@ public class Main {
     static List<Compra> compras = new ArrayList<>();
     static double salario;
     static  String funcao, nome, cpf, celular;
+    static int opcao = 0;
+    static int opcaoEndereco = 0;
+    static Scanner sc = new Scanner(System.in);
+    static String rua, bairro, cidade, cep;
+    static int numero;
 
     public static void main(String[] args) {
-
-        int opcao = 0;
-        Scanner sc = new Scanner(System.in);
         while (opcao != 6) {
             System.out.println("MENU PRINCIPAL");
             System.out.println("Escolha uma opção:");
@@ -57,17 +59,39 @@ public class Main {
     }
 
     public static void cadastrarFuncionarios() {
-        //Funcionario funcionario =  new Pessoa(nome, cpf, endereco, celular);
-		cadastrarPessoas();
+        try {
+            System.out.println("Digite o nome do funcionário: ");
+            nome = sc.nextLine();
+            System.out.println("Digite o CPF do funcionário: ");
+            cpf = sc.nextLine();
+            System.out.println("Digite o contato do funcionário: ");
+            celular = sc.nextLine();
+            System.out.println("Digite o salário do funcionário: ");
+            salario = sc.nextDouble();
+            System.out.println("Digite sua funcao: ");
+            funcao = sc.nextLine();
+            System.out.println("Cadastrar endereço completo (1) ou sem o CEP(2): ");
+            opcaoEndereco = sc.nextInt();
+            // todos os dados de endereco aqui
+            if(opcaoEndereco == 2){
+                System.out.println("Digite o CEP");
+                //contrutor do cep
+            }else{
+                //contrutor sem cep
+            }
+
+            Funcionario funcionario =  new Funcionario(nome, cpf, endereco, celular,salario,funcao);
+        }catch (InputMismatchException erro){
+            System.out.println("Campo digitado errado.");
+            opcao = 0;
+            return;
+        }
     }
 
 	public static void cadastrarClientes() {
-		cadastrarPessoas();
 	}
 
-	public static Pessoa cadastrarPessoas() {
-        System.out.println("Digite um nome: ");
-//        Pessoa pessoaNova = new Pessoa(nome, cpf, endereco, celular);
-		return null;
-	}
+    public static void cadastrarEndereco() {
+    }
+
 }
