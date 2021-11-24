@@ -13,11 +13,11 @@ package trabainHmmmm;
 
 public class Endereco {
 	
-	String rua;
-	int numero;
-	String bairro;
-	String cidade;
-	String cep;
+	private String rua;
+	private int numero;
+	private String bairro;
+	private String cidade;
+	private String cep;
 	
 	public Endereco(String rua, int numero, String bairro, String cidade, String cep) {
 		this.rua = rua;

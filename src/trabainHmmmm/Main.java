@@ -26,7 +26,6 @@ import java.util.InputMismatchException; //input tipo errado
 
 
 public class Main {
-    static Endereco endereco = null;
     static List<Funcionario> funcionarios = new ArrayList<>();
     static List<Cliente> cliente = new ArrayList<>();
     static List<Fornecedor> fornecedores = new ArrayList<>();
@@ -35,10 +34,7 @@ public class Main {
     static double salario;
     static  String funcao, nome, cpf, celular;
     static int opcao = 0;
-    static int opcaoEndereco = 0;
     static Scanner sc = new Scanner(System.in);
-    static String rua, bairro, cidade, cep;
-    static int numero;
 
     public static void main(String[] args) {
         while (opcao != 6) {
@@ -60,6 +56,7 @@ public class Main {
 
     public static void cadastrarFuncionarios() {
         try {
+            sc.nextLine();
             System.out.println("Digite o nome do funcionário: ");
             nome = sc.nextLine();
             System.out.println("Digite o CPF do funcionário: ");
@@ -71,16 +68,11 @@ public class Main {
             System.out.println("Digite sua funcao: ");
             funcao = sc.nextLine();
             System.out.println("Cadastrar endereço completo (1) ou sem o CEP(2): ");
-            opcaoEndereco = sc.nextInt();
-            // todos os dados de endereco aqui
-            if(opcaoEndereco == 2){
-                System.out.println("Digite o CEP");
-                //contrutor do cep
-            }else{
-                //contrutor sem cep
-            }
-
+            int opcaoEndereco = sc.nextInt();
+            Endereco endereco = cadastrarEndereco(opcaoEndereco);
             Funcionario funcionario =  new Funcionario(nome, cpf, endereco, celular,salario,funcao);
+            System.out.println(funcionario.getNome());
+            System.out.println(funcionario.getEndereco().getBairro());
         }catch (InputMismatchException erro){
             System.out.println("Campo digitado errado.");
             opcao = 0;
@@ -91,7 +83,32 @@ public class Main {
 	public static void cadastrarClientes() {
 	}
 
-    public static void cadastrarEndereco() {
+    public static Endereco cadastrarEndereco(int opcaoEndereco) {
+        String rua, bairro, cidade, cep;
+        int numero;
+        Endereco endereco;
+        try {
+            sc.nextLine();
+            System.out.println("Digite a cidade: ");
+            cidade = sc.nextLine();
+            System.out.println("Digite o bairro: ");
+            bairro = sc.nextLine();
+            System.out.println("Digite a rua: ");
+            rua = sc.nextLine();
+            System.out.println("Digite o numero: ");
+            numero = sc.nextInt();
+            if (opcaoEndereco == 2) {
+                System.out.println("Digite o CEP");
+                cep = sc.nextLine();
+                endereco = new Endereco(rua, numero, bairro, cidade, cep);
+                //contrutor do cep
+            } else
+                endereco = new Endereco(rua, numero, bairro, cidade);
+        } catch (InputMismatchException erro) {
+            System.out.println("Campo digitado errado.");
+            return null;
+        }
+        return endereco;
     }
 
 }
