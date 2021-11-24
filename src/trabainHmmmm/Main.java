@@ -26,14 +26,14 @@ import java.util.InputMismatchException; //input tipo errado
 
 
 public class Main {
-    List<Endereco> enderecos = new ArrayList<>();
-    List<Funcionario> funcionarios = new ArrayList<>();
-    List<Cliente> cliente = new ArrayList<>();
-    List<Fornecedor> fornecedores = new ArrayList<>();
-    List<Produto> produtos = new ArrayList<>();
-    List<Compra> compras = new ArrayList<>();
-    double salario;
-    String funcao, nome, cpf, celular;
+    static Endereco endereco = null;
+    static List<Funcionario> funcionarios = new ArrayList<>();
+    static List<Cliente> cliente = new ArrayList<>();
+    static List<Fornecedor> fornecedores = new ArrayList<>();
+    static List<Produto> produtos = new ArrayList<>();
+    static List<Compra> compras = new ArrayList<>();
+    static double salario;
+    static  String funcao, nome, cpf, celular;
 
     public static void main(String[] args) {
 
@@ -55,8 +55,9 @@ public class Main {
             }
         }
     }
-  
+
     public static void cadastrarFuncionarios() {
+        //Funcionario funcionario =  new Pessoa(nome, cpf, endereco, celular);
 		cadastrarPessoas();
     }
 
@@ -65,6 +66,8 @@ public class Main {
 	}
 
 	public static Pessoa cadastrarPessoas() {
+        System.out.println("Digite um nome: ");
+//        Pessoa pessoaNova = new Pessoa(nome, cpf, endereco, celular);
 		return null;
 	}
 }
