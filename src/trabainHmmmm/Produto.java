@@ -14,8 +14,7 @@ public class Produto {
 	private Float valor;
 	private Fornecedor empresa;
 	
-	public Produto(String razaoSocial, String nomeFantasia, String cnpj, Endereco endereco, String celular,String nomeProduto, Float valor, Fornecedor empresa) {
-		super();
+	public Produto(String nomeProduto, Float valor, Fornecedor empresa) {
 		this.nomeProduto = nomeProduto;
 		this.valor = valor;
 		this.empresa = empresa;
@@ -28,7 +27,7 @@ public class Produto {
 	
 	 public String toString()
 	 {
-		 return nomeProduto+""+valor;
+		 return nomeProduto+" "+valor;
 	 }
 
 	public String getNomeProduto() {

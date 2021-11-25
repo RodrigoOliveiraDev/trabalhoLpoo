@@ -28,6 +28,8 @@ public abstract class Pessoa implements Verificavel {
 	
 	public Pessoa(String nome, String cpf, Endereco endereco, String celular) {
 		this.nome = nome;
+		if(!validar(cpf))
+		    solicitarNovo();
 		this.cpf = cpf;
 		this.endereco = endereco;
 		this.celular = celular;
@@ -43,6 +45,8 @@ public abstract class Pessoa implements Verificavel {
 		return cpf;
 	}
 	public void setCpf(String cpf) {
+        if(!validar(cpf))
+            solicitarNovo();
 		this.cpf = cpf;
 	}
 	public Endereco getEndereco() {

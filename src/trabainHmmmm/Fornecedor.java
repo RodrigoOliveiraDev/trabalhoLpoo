@@ -32,6 +32,8 @@ public class Fornecedor implements Verificavel {
         super();
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
+        if(!validar(cnpj))
+            solicitarNovo();
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.celular = celular;
@@ -118,6 +120,8 @@ public class Fornecedor implements Verificavel {
     }
 
     public void setCnpj(String cnpj) {
+        if(!validar(cnpj))
+            solicitarNovo();
         this.cnpj = cnpj;
     }
 

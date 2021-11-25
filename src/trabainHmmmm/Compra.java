@@ -23,7 +23,6 @@ class Compra {
 	private List <Produto> produtos;
 	
 	public Compra(Funcionario funcionario, Cliente cliente) {
-		super();
 		this.funcionario = funcionario;
 		this.cliente = cliente;
 	}
