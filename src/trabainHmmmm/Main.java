@@ -36,7 +36,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (opcao != 6) {
+        while (opcao != 11) {
             System.out.println("MENU PRINCIPAL");
             System.out.println("Escolha uma opção válida:");
             System.out.println("1 - Cadastrar Funcionario");
@@ -44,7 +44,13 @@ public class Main {
             System.out.println("3 - Cadastrar Fornecedor");
             System.out.println("4 - Cadastrar Produto");
             System.out.println("5 - Cadastrar Compra");
-            System.out.println("6 - Encerrar");
+
+            System.out.println("6 - Listar Funcionario: ");
+            System.out.println("7 - Listar Cliente: ");
+            System.out.println("8 - Listar Fornecedor: ");
+            System.out.println("9 - Listar Produto: ");
+            System.out.println("10 - Listar Compras: ");
+            System.out.println("11 - Encerrar");
             opcao = sc.nextInt();
             switch (opcao) {
                 case 1:
@@ -75,6 +81,31 @@ public class Main {
                         break;
                     }
                     cadastrarCompras();
+                    opcao = 0;
+                    break;
+                case 6:
+                    listaFuncionarios();
+                    opcao = 0;
+                    break;
+                case 7:
+                    listaClientes();
+                    opcao = 0;
+                    break;
+                case 8:
+                    listaForn();
+                    opcao = 0;
+                    break;
+                case 9:
+                    listaProdutos();
+                    opcao = 0;
+                    break;
+                case 10:
+                    if (funcionarios.isEmpty() || clientes.isEmpty() || produtos.isEmpty()) {
+                        System.out.println("Você precisa uma Compra para prosseguir!");
+                        opcao = 0;
+                        break;
+                    }
+                    listaCompras();
                     opcao = 0;
                     break;
             }
@@ -152,10 +183,10 @@ public class Main {
         } catch (InputMismatchException erro) {
             System.out.println("Campo digitado errado.");
             opcao = 0;
+
             return;
         }
     }
-
     public static void cadastrarFornecedores() {
         try {
             String razaoSocial, nomeFantasia, cnpj, celular;
@@ -217,12 +248,12 @@ public class Main {
                 listaClientes();
                 System.out.println("escolha 1 Cliente: ");
                 opCliente = sc.nextInt();
-            } while (clientes.get(opCliente) == null);
+            } while (opCliente < clientes.size() || clientes.get(opCliente) == null);
             do {
                 listaFuncionarios();
                 System.out.println("escolha 1 Funcionario: ");
                 opFunc = sc.nextInt();
-            } while (funcionarios.get(opFunc) == null);
+            } while (opFunc < funcionarios.size() || funcionarios.get(opFunc) == null);
             Compra compra = new Compra(funcionarios.get(opFunc),clientes.get(opCliente));
             System.out.println("Cadastrado com sucesso!");
             do {
@@ -230,7 +261,7 @@ public class Main {
                 System.out.println("escolha 1 produto: ");
                 System.out.println("Digite -1 para parar de cadastrar produtos: ");
                 opProd = sc.nextInt();
-                if(opProd != -1 || opProd < produtos.size() || produtos.get(opProd) != null){
+                if(opProd != -1 && opProd < produtos.size() || produtos.get(opProd) != null){
                     compra.adicionaProduto(produtos.get(opProd));
                 }else
                     System.out.println("Digite um produto válido!");
@@ -246,7 +277,6 @@ public class Main {
     public static void listaForn() {
         int i;
         for (i = 0; i < fornecedores.size(); i++) {
-            System.out.println("s");
             System.out.println(i + "  - " + fornecedores.get(i).getRazaoSocial());
         }
     }
@@ -270,5 +300,19 @@ public class Main {
         for (i = 0; i < produtos.size(); i++) {
             System.out.println(i + "  - " + produtos.get(i).toString());
         }
+    }
+
+    public static void listaCompras() {
+        int i,opCompra=0;
+        for (i = 0; i < compras.size(); i++) {// para mostrar as compras
+            System.out.println(i + "  - Funcionário: " + compras.get(i).getFuncionario().getNome()+
+                    " - Cliente: "+compras.get(i).getCliente().getNome()+" Produtos: "+compras.get(i).getProdutos().size());
+        }
+        do{
+            System.out.println("Digite o número da compra para ver os detalhes ou -1 para voltar ao menu");
+            opCompra = sc.nextInt();
+            if(opCompra != -1 && opCompra < compras.size())
+                compras.get(opCompra).listarCompra();
+        }while(opCompra != -1);
     }
 }
