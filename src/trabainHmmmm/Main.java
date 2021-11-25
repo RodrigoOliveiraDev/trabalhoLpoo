@@ -99,6 +99,7 @@ public class Main {
             Endereco endereco = cadastrarEndereco(opcaoEndereco);
             Funcionario funcionario = new Funcionario(nome, cpf, endereco, celular, salario, funcao);
             funcionarios.add(funcionario);
+            System.out.println("Cadastrado com sucesso!");
         } catch (InputMismatchException erro) {
             System.out.println("Campo digitado errado.");
             opcao = 0;
@@ -120,6 +121,7 @@ public class Main {
             Endereco endereco = cadastrarEndereco(opcaoEndereco);
             Cliente cliente = new Cliente(nome, cpf, endereco, celular);
             clientes.add(cliente);
+            System.out.println("Cadastrado com sucesso!");
         } catch (InputMismatchException erro) {
             System.out.println("Campo digitado errado.");
             opcao = 0;
@@ -142,9 +144,11 @@ public class Main {
                 listaForn();
                 System.out.println("escolha 1 fornecedor: ");
                 opForn = sc.nextInt();
-            } while (fornecedores.get(opForn) != null);
+                //irá pedir fornecedor até inserir um valido
+            } while (opForn > fornecedores.size() || fornecedores.get(opForn) == null);
             Produto produto = new Produto(nomeProduto, valor, fornecedores.get(opForn));
             produtos.add(produto);
+            System.out.println("Cadastrado com sucesso!");
         } catch (InputMismatchException erro) {
             System.out.println("Campo digitado errado.");
             opcao = 0;
@@ -169,6 +173,7 @@ public class Main {
             Endereco endereco = cadastrarEndereco(opcaoEndereco);
             Fornecedor fornecedor = new Fornecedor(razaoSocial, nomeFantasia, cnpj, endereco, celular);
             fornecedores.add(fornecedor);
+            System.out.println("Cadastrado com sucesso!");
         } catch (InputMismatchException erro) {
             System.out.println("Campo digitado errado.");
             opcao = 0;
@@ -203,6 +208,7 @@ public class Main {
         }
         return endereco;
     }
+
     public static void cadastrarCompras() {
         int opFunc,opCliente,opProd;
         try {
@@ -218,16 +224,19 @@ public class Main {
                 opFunc = sc.nextInt();
             } while (funcionarios.get(opFunc) == null);
             Compra compra = new Compra(funcionarios.get(opFunc),clientes.get(opCliente));
+            System.out.println("Cadastrado com sucesso!");
             do {
                 listaProdutos();
                 System.out.println("escolha 1 produto: ");
-                System.out.println("Digite 0 para parar de cadastrar produtos: ");
+                System.out.println("Digite -1 para parar de cadastrar produtos: ");
                 opProd = sc.nextInt();
-                if(produtos.get(opProd) != null){
+                if(opProd != -1 || opProd < produtos.size() || produtos.get(opProd) != null){
                     compra.adicionaProduto(produtos.get(opProd));
                 }else
                     System.out.println("Digite um produto válido!");
-            } while (opProd !=0);
+            } while (opProd !=-1);
+            if (compra != null)
+                compras.add(compra);
         } catch (InputMismatchException erro) {
             System.out.println("Campo digitado errado.");
             return;
@@ -244,21 +253,21 @@ public class Main {
 
     public static void listaClientes() {
         int i;
-        for (i = 0; 1 > clientes.size(); i++) {
+        for (i = 0; i < clientes.size(); i++) {
             System.out.println(i + "  - " + clientes.get(i).toString());
         }
     }
 
     public static void listaFuncionarios() {
         int i;
-        for (i = 0; 1 > funcionarios.size(); i++) {
+        for (i = 0; i < funcionarios.size(); i++) {
             System.out.println(i + "  - " + funcionarios.get(i).toString());
         }
     }
 
     public static void listaProdutos() {
         int i;
-        for (i = 0; 1 > produtos.size(); i++) {
+        for (i = 0; i < produtos.size(); i++) {
             System.out.println(i + "  - " + produtos.get(i).toString());
         }
     }

@@ -32,8 +32,8 @@ public class Fornecedor implements Verificavel {
         super();
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
-        if(!validar(cnpj))
-            solicitarNovo();
+//        if(!validar(cnpj))
+//            solicitarNovo();
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.celular = celular;
